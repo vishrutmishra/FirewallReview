@@ -1,1 +1,4 @@
 *.conf
+*.pyc
+*.csv
+*.log
