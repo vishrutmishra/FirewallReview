@@ -1,4 +1,4 @@
 import sys
-from FireReader import FireReader as fr
+from FileReader import FileReader as fr
 
 file = str(sys.argv[1])
