@@ -41,11 +41,19 @@ class File:
       self.addObj(obj)
 
   def read(self):
-    line = self.file.readline()
+    line = self.file.readline().rstrip()
     while line:
       self.parseLine(line)
-      print (self.lastParentDepth.peek().depth, self.lastParentDepth.peek().line)
-      line = self.file.readline()
+      line = self.file.readline().rstrip()
+
+  def printAll(self):
+    self.printObj(self.objList)
+
+  def printObj(self, objList):
+    for obj in objList:
+      print obj.line
+      self.printObj(obj.child)
+    print
 
   @staticmethod
   def calcDepth(line):
