@@ -1,6 +1,6 @@
 import sys
 import os
-from Modules.FileReader import FileReader
+from Modules.File import File
 
 file = os.path.join('conf',str(sys.argv[1]))
-f = FileReader(file)
+f = File(file)
