@@ -6,11 +6,6 @@ class File:
     self.lastParentDepth = Stack()
 
   class Obj:
-    def __new__(self, line, depth):
-      self.depth = depth
-      self.line = line
-      self.child = []
-
     def __init__(self, line, depth):
       self.depth = depth
       self.line = line
