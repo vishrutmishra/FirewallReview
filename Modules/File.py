@@ -4,9 +4,10 @@ class File:
       self.line = line
   def __init__(self, file):
     self.file =  open(file, 'r')
-    self.line = Line
+    self.line = []
 
   def readLine(self):
-    return self.file.readline()
+    self.line.append(self.file.readline())
+    return self.line[-1]
 
   # def parseLine():
