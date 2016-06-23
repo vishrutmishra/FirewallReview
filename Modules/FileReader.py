@@ -9,6 +9,7 @@ class File:
     def __init__(self, line, depth):
       self.depth = depth
       self.line = line
+      self.keyword = self.calcKeyword()
       self.child = []
 
     def parse(self):
@@ -18,9 +19,12 @@ class File:
       self.child.append(obj)
       return self.child[-1]
 
+    def calcKeyword(self):
+      return self.line.split()[0]
+
   def parseLine(self, line):
     depth = File.calcDepth(line)
-    obj = self.Obj(line, depth)
+    obj = self.Obj(line.lstrip(), depth)
     self.addObj(obj)
 
   def addObj(self, obj):
@@ -47,7 +51,7 @@ class File:
 
   def printObj(self, objList):
     for obj in objList:
-      print obj.line
+      print str(obj.depth)+'-'+obj.keyword+':'+obj.line
       self.printObj(obj.child)
     print
 
