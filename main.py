@@ -1,5 +1,6 @@
 import sys
-from FileReader import FileReader as fr
+import os
+from Modules.FileReader import FileReader
 
-file = str(sys.argv[1])
-Fire = fr(file)
+file = os.path.join('conf',str(sys.argv[1]))
+f = FileReader(file)
