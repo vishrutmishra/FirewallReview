@@ -1,7 +1,12 @@
-class FileReader:
+class File:
+  class Line:
+    def __init__(self, line):
+      self.line = line
   def __init__(self, file):
-    self.file = file
+    self.file =  open(file, 'r')
+    self.line = Line
 
-  # def readFile():
+  def readLine(self):
+    return self.file.readline()
 
   # def parseLine():
