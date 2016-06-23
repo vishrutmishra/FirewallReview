@@ -1,30 +1,53 @@
+from DS import Stack
 class File:
+  def __init__(self, file):
+    self.file =  open(file, 'r')
+    self.objList = []
+    self.lastParentDepth = Stack()
+
   class Obj:
+    def __new__(self, line, depth):
+      self.depth = depth
+      self.line = line
+      self.child = []
+
     def __init__(self, line, depth):
       self.depth = depth
       self.line = line
-      self.Child = []
+      self.child = []
 
     def parse(self):
-      print self.line
+      self.objList
 
-    def addChild(self, line):
-      self.child.append(Obj(line))
+    def addChild(self, obj):
+      self.child.append(obj)
+      return self.child[-1]
 
-  def __init__(self, file):
-    self.file =  open(file, 'r')
-    self.line = []
-
-  def readLine(self):
-    line = self.file.readline()
+  def parseLine(self, line):
     depth = File.calcDepth(line)
-    print depth
-    self.line.append(self.Obj(line, depth))
-    return self.line[-1]
+    obj = self.Obj(line, depth)
+    self.addObj(obj)
+
+  def addObj(self, obj):
+    if self.lastParentDepth.isEmpty():
+      self.objList.append(obj)
+      self.lastParentDepth.push(self.objList[-1])
+    elif obj.depth > self.lastParentDepth.peek().depth:
+      child = self.Obj(obj.line, obj.depth)
+      chld = self.lastParentDepth.peek().addChild(child)
+      self.lastParentDepth.push(chld)
+    else:
+      self.lastParentDepth.pop()
+      self.addObj(obj)
+
+  def read(self):
+    line = self.file.readline()
+    while line:
+      self.parseLine(line)
+      print (self.lastParentDepth.peek().depth, self.lastParentDepth.peek().line)
+      line = self.file.readline()
 
   @staticmethod
   def calcDepth(line):
     depth = len(line) - len(line.lstrip())
     return depth
-
-  # def parseLine():
