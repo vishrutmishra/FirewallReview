@@ -45,6 +45,7 @@ class File:
     while line:
       self.parseLine(line)
       line = self.file.readline().rstrip()
+    return self.objList
 
   def printAll(self):
     self.printObj(self.objList)
