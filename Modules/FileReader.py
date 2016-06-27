@@ -1,4 +1,6 @@
+import re
 from DS import Stack
+from CiscoConfParser import ciscoConfParser
 class File:
   def __init__(self, file):
     self.file =  open(file, 'r')
@@ -20,7 +22,10 @@ class File:
       return self.child[-1]
 
     def calcKeyword(self):
-      return self.line.split()[0]
+      keyword = self.line.split()[0]
+      if re.search('^[:!<-]+$',keyword):
+        keyword = 'comment'
+      return keyword
 
   def parseLine(self, line):
     depth = File.calcDepth(line)
@@ -53,7 +58,6 @@ class File:
     for obj in objList:
       print str(obj.depth)+'-'+obj.keyword+':'+obj.line
       self.printObj(obj.child)
-    print
 
   @staticmethod
   def calcDepth(line):
