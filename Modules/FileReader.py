@@ -23,7 +23,7 @@ class File:
 
     def calcKeyword(self):
       keyword = self.line.split()[0]
-      if re.search('^[:!<-]+$',keyword):
+      if re.search('^(!|:|<---)$',keyword):
         keyword = 'comment'
       return keyword
 
